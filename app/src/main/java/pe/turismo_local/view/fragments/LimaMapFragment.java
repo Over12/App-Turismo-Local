@@ -81,6 +81,10 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
         setUpMap();
 
         mMap.setOnMarkerClickListener(marker -> {
+            if (Objects.equals(marker.getTitle(), "Lima, Perú")) {
+                return false;
+            }
+
             mostrarMenu(marker.getTitle());
             return true;
         });
@@ -123,7 +127,6 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
         TextView txtLugar = view.findViewById(R.id.txtLugar);
         ImageView imgLugar = view.findViewById(R.id.imgLugar);
         TextView txtDescripcion = view.findViewById(R.id.txtDescripcion);
-        Button btnVerDetalles = view.findViewById(R.id.btnVerDetalles);
         Button btnCerrar = view.findViewById(R.id.btnCerrar);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
 
@@ -150,10 +153,6 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng latLng = new LatLng(lugarTuristico.getLatitud(), lugarTuristico.getLongitud());
         moverCamara(latLng);
-
-        btnVerDetalles.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Ver detalles de " + lugar, Toast.LENGTH_SHORT).show();
-        });
 
         btnCerrar.setOnClickListener(v -> bottomSheetDialog.dismiss());
 

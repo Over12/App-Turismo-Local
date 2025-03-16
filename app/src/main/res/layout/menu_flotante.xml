@@ -16,22 +16,28 @@
             android:text="Nombre del Lugar"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="15dp"/>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/imgLugar"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:scaleType="centerCrop"
-            android:paddingBottom="10dp"/>
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/imgLugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_launcher_foreground"
+                android:scaleType="centerCrop"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/txtDescripcion"
@@ -40,14 +46,6 @@
             android:text="Descripción del lugar turistico"
             android:textSize="16sp"
             android:paddingBottom="10dp"/>
-
-        <Button
-            android:id="@+id/btnVerDetalles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ver Detalles"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/primary"/>
 
         <Button
             android:id="@+id/btnComoLlegar"
