@@ -24,11 +24,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import pe.turismo_local.R;
+import pe.turismo_local.controller.LugarController;
 import pe.turismo_local.databinding.FragmentLimaBinding;
+import pe.turismo_local.model.LugarTuristico;
 
 public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
     private FragmentLimaBinding binding;
@@ -87,18 +90,15 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void addMarkers() {
-        List<Pair<LatLng, String>> lugares = Arrays.asList(
-                new Pair<>(new LatLng(-12.0453, -77.0311), "Plaza Mayor de Lima"),
-                new Pair<>(new LatLng(-12.0432, -77.0282), "Catedral de Lima"),
-                new Pair<>(new LatLng(-12.0464, -77.0300), "Palacio de Gobierno"),
-                new Pair<>(new LatLng(-12.1210, -77.0301), "Parque Kennedy"),
-                new Pair<>(new LatLng(-12.0855, -77.0944), "Museo Larco")
-        );
+        LugarController lugarController = new LugarController(requireContext());
 
-        for (Pair<LatLng, String> lugar : lugares) {
+        List<LugarTuristico> lugares = lugarController.obtenerLugaresPorCiudad("Lima");
+
+        for (LugarTuristico lugar : lugares) {
+            LatLng latLng = new LatLng(lugar.getLatitud(), lugar.getLongitud());
             mMap.addMarker(new MarkerOptions()
-                    .position(lugar.first)
-                    .title(lugar.second)
+                    .position(latLng)
+                    .title(lugar.getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         }
     }

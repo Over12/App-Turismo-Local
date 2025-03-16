@@ -24,7 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import pe.turismo_local.R;
+import pe.turismo_local.controller.LugarController;
 import pe.turismo_local.databinding.FragmentArequipaBinding;
+import pe.turismo_local.model.LugarTuristico;
 
 public class ArequipaMapFragment extends Fragment implements OnMapReadyCallback {
     private FragmentArequipaBinding binding;
@@ -78,18 +80,15 @@ public class ArequipaMapFragment extends Fragment implements OnMapReadyCallback 
     }
 
     private void addMarkers() {
-        List<Pair<LatLng, String>> lugares = Arrays.asList(
-                new Pair<>(new LatLng(-16.3989, -71.5369), "Plaza de Armas de Arequipa"),
-                new Pair<>(new LatLng(-16.3956, -71.5372), "Monasterio de Santa Catalina"),
-                new Pair<>(new LatLng(-16.3905, -71.5454), "Mirador de Yanahuara"),
-                new Pair<>(new LatLng(-16.4493, -71.4973), "Molino de Sabandía"),
-                new Pair<>(new LatLng(-16.4162, -71.1065), "Reserva Nacional de Salinas y Aguada Blanca")
-        );
+        LugarController lugarController = new LugarController(requireContext());
 
-        for (Pair<LatLng, String> lugar : lugares) {
+        List<LugarTuristico> lugares = lugarController.obtenerLugaresPorCiudad("Arequipa");
+
+        for (LugarTuristico lugar : lugares) {
+            LatLng latLng = new LatLng(lugar.getLatitud(), lugar.getLongitud());
             mMap.addMarker(new MarkerOptions()
-                    .position(lugar.first)
-                    .title(lugar.second)
+                    .position(latLng)
+                    .title(lugar.getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         }
     }

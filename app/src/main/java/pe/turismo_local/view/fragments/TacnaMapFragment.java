@@ -24,7 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import pe.turismo_local.R;
+import pe.turismo_local.controller.LugarController;
 import pe.turismo_local.databinding.FragmentTacnaBinding;
+import pe.turismo_local.model.LugarTuristico;
 
 public class TacnaMapFragment extends Fragment implements OnMapReadyCallback {
     private FragmentTacnaBinding binding;
@@ -78,19 +80,15 @@ public class TacnaMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void addMarkers() {
-        // Marcadores de lugares turísticos en Tacna
-        List<Pair<LatLng, String>> lugares = Arrays.asList(
-                new Pair<>(new LatLng(-18.0066, -70.2474), "Catedral de Tacna"),
-                new Pair<>(new LatLng(-18.0048, -70.2462), "Museo Ferroviario de Tacna"),
-                new Pair<>(new LatLng(-17.7768, -70.1715), "Baños Termales de Calientes"),
-                new Pair<>(new LatLng(-17.9373, -70.1502), "Petroglifos de Miculla"),
-                new Pair<>(new LatLng(-17.9994, -70.8111), "Monumento al Soldado Desconocido")
-        );
+        LugarController lugarController = new LugarController(requireContext());
 
-        for (Pair<LatLng, String> lugar : lugares) {
+        List<LugarTuristico> lugares = lugarController.obtenerLugaresPorCiudad("Tacna");
+
+        for (LugarTuristico lugar : lugares) {
+            LatLng latLng = new LatLng(lugar.getLatitud(), lugar.getLongitud());
             mMap.addMarker(new MarkerOptions()
-                    .position(lugar.first)
-                    .title(lugar.second)
+                    .position(latLng)
+                    .title(lugar.getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         }
     }
