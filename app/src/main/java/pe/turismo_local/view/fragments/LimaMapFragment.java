@@ -9,7 +9,10 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,9 +21,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import pe.turismo_local.R;
 import pe.turismo_local.databinding.FragmentLimaBinding;
@@ -62,6 +67,11 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
         });
 
         setUpMap();
+
+        mMap.setOnMarkerClickListener(marker -> {
+            mostrarMenu(marker.getTitle());
+            return true;
+        });
     }
 
     private void setUpMap() {
@@ -91,5 +101,25 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
                     .title(lugar.second)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         }
+    }
+
+    private void mostrarMenu(String lugar) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
+        View view = getLayoutInflater().inflate(R.layout.menu_flotante, null);
+        bottomSheetDialog.setContentView(view);
+
+        TextView txtLugar = view.findViewById(R.id.txtLugar);
+        Button btnVerDetalles = view.findViewById(R.id.btnVerDetalles);
+        Button btnCerrar = view.findViewById(R.id.btnCerrar);
+
+        txtLugar.setText(lugar);
+
+        btnVerDetalles.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "Ver detalles de " + lugar, Toast.LENGTH_SHORT).show();
+        });
+
+        btnCerrar.setOnClickListener(v -> bottomSheetDialog.dismiss());
+
+        bottomSheetDialog.show();
     }
 }
