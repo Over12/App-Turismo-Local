@@ -9,10 +9,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,26 +17,22 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
 import pe.turismo_local.R;
-import pe.turismo_local.databinding.FragmentLocationBinding;
+import pe.turismo_local.databinding.FragmentLimaBinding;
 
-public class LocationFragment extends Fragment implements OnMapReadyCallback {
-    private FragmentLocationBinding binding;
+public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
+    private FragmentLimaBinding binding;
     private GoogleMap mMap;
     private RelativeLayout loadingScreen;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentLocationBinding.inflate(inflater, container, false);
+        binding = FragmentLimaBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

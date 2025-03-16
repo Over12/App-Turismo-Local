@@ -9,15 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pe.turismo_local.R;
-import pe.turismo_local.databinding.FragmentHomeBinding;
+import pe.turismo_local.databinding.FragmentArequipaBinding;
 
-public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
+public class ArequipaMapFragment extends Fragment {
+    private FragmentArequipaBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentArequipaBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

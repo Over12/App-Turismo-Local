@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import pe.turismo_local.R;
 import pe.turismo_local.databinding.ActivityContainerBinding;
-import pe.turismo_local.view.fragments.FavoritesFragment;
-import pe.turismo_local.view.fragments.HomeFragment;
-import pe.turismo_local.view.fragments.LocationFragment;
+import pe.turismo_local.view.fragments.TacnaMapFragment;
+import pe.turismo_local.view.fragments.ArequipaMapFragment;
+import pe.turismo_local.view.fragments.LimaMapFragment;
 
 public class ContainerActivity extends AppCompatActivity {
     private ActivityContainerBinding binding;
@@ -27,7 +27,7 @@ public class ContainerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, new LimaMapFragment())
                 .commit();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -40,16 +40,16 @@ public class ContainerActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
             int id = item.getItemId();
 
-            if (id == R.id.nav_home) {
-                selectedFragment = new HomeFragment();
+            if (id == R.id.nav_arequipa) {
+                selectedFragment = new ArequipaMapFragment();
             }
 
-            if (id == R.id.nav_locations) {
-                selectedFragment = new LocationFragment();
+            if (id == R.id.nav_lima) {
+                selectedFragment = new LimaMapFragment();
             }
 
-            if (id == R.id.nav_favorites) {
-                selectedFragment = new FavoritesFragment();
+            if (id == R.id.nav_tacna) {
+                selectedFragment = new TacnaMapFragment();
             }
 
             if (selectedFragment != null) {
