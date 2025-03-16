@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="20dp"
+    android:padding="20dp"
+    android:background="@color/background"
+    android:gravity="center"
     tools:context=".view.MainActivity">
 
     <TextView
@@ -21,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="Imagen de inicio de la app"
+        android:layout_marginHorizontal="20dp"
         android:src="@drawable/img_home" />
 
     <Button
@@ -28,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comenzar"
+        android:backgroundTint="@color/primary"
+        android:layout_marginHorizontal="20dp"
         android:onClick="changeActivity"/>
 
 </LinearLayout>

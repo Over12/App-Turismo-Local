@@ -18,17 +18,23 @@
         android:id="@+id/btnVerDetalles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Detalles" />
+        android:text="Ver Detalles"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/primary"/>
 
     <Button
         android:id="@+id/btnComoLlegar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Como llegar" />
+        android:text="Como llegar"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/secondary"/>
 
     <Button
         android:id="@+id/btnCerrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cerrar"/>
+        android:text="Cerrar"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/tertiary"/>
 </LinearLayout>
