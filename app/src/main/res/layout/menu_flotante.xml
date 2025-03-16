@@ -10,15 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre del Lugar"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="10dp"/>
 
     <Button
         android:id="@+id/btnVerDetalles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ver Detalles" />
+
+    <Button
+        android:id="@+id/btnComoLlegar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Como llegar" />
 
     <Button
         android:id="@+id/btnCerrar"
