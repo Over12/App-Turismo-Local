@@ -18,8 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_LUGARES = "lugares";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NOMBRE = "nombre";
-    private static final String COLUMN_CUIDAD = "ciudad";
     private static final String COLUMN_DESCRIPCION = "descripcion";
+    private static final String COLUMN_CUIDAD = "ciudad";
     private static final String COLUMN_LATITUD = "latitud";
     private static final String COLUMN_LONGITUD = "longitud";
     private static final String COLUMN_IMAGEN = "imagen";
@@ -27,6 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+    }
+
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -214,153 +218,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "https://100fotosdelviaje.com.ar/wp-content/uploads/2019/05/Foto-1454-A%C3%91O-2019-Per%C3%BA-Lima-Monumento-al-Soldado-Desconocido-Chorrillos-100fotosdelviaje.com_.ar_.jpg",
                 "0"
         });
-    }
-
-    public void insertLugar(LugarTuristico lugar) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NOMBRE, lugar.getNombre());
-        values.put(COLUMN_DESCRIPCION, lugar.getDescripcion());
-        values.put(COLUMN_CUIDAD, lugar.getCuidad());
-        values.put(COLUMN_LATITUD, lugar.getLatitud());
-        values.put(COLUMN_LONGITUD, lugar.getLongitud());
-        values.put(COLUMN_IMAGEN, lugar.getImagen());
-        values.put(COLUMN_FAVORITO, lugar.isFavorito() ? 1 : 0);
-
-        db.insert(TABLE_LUGARES, null, values);
-        db.close();
-    }
-
-    public void updateLugar(LugarTuristico lugar) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NOMBRE, lugar.getNombre());
-        values.put(COLUMN_DESCRIPCION, lugar.getDescripcion());
-        values.put(COLUMN_CUIDAD, lugar.getCuidad());
-        values.put(COLUMN_LATITUD, lugar.getLatitud());
-        values.put(COLUMN_LONGITUD, lugar.getLongitud());
-        values.put(COLUMN_IMAGEN, lugar.getImagen());
-        values.put(COLUMN_FAVORITO, lugar.isFavorito() ? 1 : 0);
-
-        db.update(TABLE_LUGARES, values, COLUMN_ID + " = ?", new String[]{String.valueOf(lugar.getId())});
-        db.close();
-    }
-
-    public void deleteLugar(int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_LUGARES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
-        db.close();
-    }
-
-    public void toggleFavorito(int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LUGARES + " SET " + COLUMN_FAVORITO + " = NOT " + COLUMN_FAVORITO + " WHERE " + COLUMN_ID + " = " + id);
-        db.close();
-    }
-
-    public List<LugarTuristico> obtenerLugares() {
-        List<LugarTuristico> lugares = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_LUGARES, null,null, null, null, null, COLUMN_NOMBRE);
-
-        if (cursor.moveToFirst()) {
-            do {
-                LugarTuristico lugar = new LugarTuristico(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getDouble(4),
-                        cursor.getDouble(5),
-                        cursor.getString(6),
-                        cursor.getInt(7) == 1
-                );
-
-                lugares.add(lugar);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-
-        db.close();
-        return lugares;
-    }
-
-    public LugarTuristico obtenerLugar(int id) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_LUGARES, null, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null, null, null);
-
-        LugarTuristico lugar = null;
-        if (cursor.moveToFirst()) {
-            lugar = new LugarTuristico(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getDouble(4),
-                    cursor.getDouble(5),
-                    cursor.getString(6),
-                    cursor.getInt(7) == 1
-            );
-            cursor.close();
-        }
-
-        db.close();
-        return lugar;
-    }
-
-    public List<LugarTuristico> obtenerFavoritos() {
-        List<LugarTuristico> lugares = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_LUGARES, null, COLUMN_FAVORITO + " = 1", null, null, null, COLUMN_NOMBRE);
-
-        if (cursor.moveToFirst()) {
-            do {
-                LugarTuristico lugar = new LugarTuristico(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getDouble(4),
-                        cursor.getDouble(5),
-                        cursor.getString(6),
-                        cursor.getInt(7) == 1
-                );
-
-                lugares.add(lugar);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-
-        db.close();
-        return lugares;
-    }
-
-    public List<LugarTuristico> obtenerLugaresPorCiudad(String ciudad) {
-        List<LugarTuristico> lugares = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_LUGARES, null, COLUMN_CUIDAD + " = ?", new String[]{ciudad}, null, null, COLUMN_NOMBRE);
-
-        if (cursor.moveToFirst()) {
-            do {
-                LugarTuristico lugar = new LugarTuristico(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getDouble(4),
-                        cursor.getDouble(5),
-                        cursor.getString(6),
-                        cursor.getInt(7) == 1
-                );
-
-                lugares.add(lugar);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-
-        db.close();
-        return lugares;
     }
 }
