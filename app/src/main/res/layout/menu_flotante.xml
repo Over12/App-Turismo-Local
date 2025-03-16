@@ -1,40 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:orientation="vertical">
+    android:padding="30dp">
 
-    <TextView
-        android:id="@+id/txtLugar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Lugar"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="10dp"/>
-
-    <Button
-        android:id="@+id/btnVerDetalles"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Detalles"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/primary"/>
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnComoLlegar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Como llegar"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/secondary"/>
+        <TextView
+            android:id="@+id/txtLugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Lugar"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"/>
 
-    <Button
-        android:id="@+id/btnCerrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cerrar"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/tertiary"/>
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/imgLugar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/txtDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción del lugar turistico"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnVerDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Detalles"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/primary"/>
+
+        <Button
+            android:id="@+id/btnComoLlegar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Como llegar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary"/>
+
+        <Button
+            android:id="@+id/btnCerrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/tertiary"/>
+    </LinearLayout>
+</ScrollView>

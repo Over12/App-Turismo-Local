@@ -1,8 +1,10 @@
 package pe.turismo_local.view.fragments;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Pair;
@@ -10,10 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -108,11 +117,39 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
         View view = getLayoutInflater().inflate(R.layout.menu_flotante, null);
         bottomSheetDialog.setContentView(view);
 
+        LugarController lugarController = new LugarController(requireContext());
+        LugarTuristico lugarTuristico = lugarController.obtenerLugarPorNombre(lugar);
+
         TextView txtLugar = view.findViewById(R.id.txtLugar);
+        ImageView imgLugar = view.findViewById(R.id.imgLugar);
+        TextView txtDescripcion = view.findViewById(R.id.txtDescripcion);
         Button btnVerDetalles = view.findViewById(R.id.btnVerDetalles);
         Button btnCerrar = view.findViewById(R.id.btnCerrar);
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
 
         txtLugar.setText(lugar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        Glide.with(this)
+                .load(lugarTuristico.getImagen())
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, @NonNull Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(imgLugar);
+
+        txtDescripcion.setText(lugarTuristico.getDescripcion());
+
+        LatLng latLng = new LatLng(lugarTuristico.getLatitud(), lugarTuristico.getLongitud());
+        moverCamara(latLng);
 
         btnVerDetalles.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Ver detalles de " + lugar, Toast.LENGTH_SHORT).show();
@@ -121,5 +158,9 @@ public class LimaMapFragment extends Fragment implements OnMapReadyCallback {
         btnCerrar.setOnClickListener(v -> bottomSheetDialog.dismiss());
 
         bottomSheetDialog.show();
+    }
+
+    private void moverCamara(LatLng latLng) {
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13), 500, null);
     }
 }

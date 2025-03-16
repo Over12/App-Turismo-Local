@@ -89,9 +89,9 @@ public class LugarController {
         return lugares;
     }
 
-    public LugarTuristico obtenerLugar(int id) {
+    public LugarTuristico obtenerLugarPorNombre(String nombre) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("lugares", null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        Cursor cursor = db.query("lugares", null, "nombre = ?", new String[]{nombre}, null, null, null);
 
         LugarTuristico lugar = null;
         if (cursor.moveToFirst()) {
