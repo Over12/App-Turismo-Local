@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/option_details"
+        android:title="Ver detalles"
+        android:icon="@drawable/ic_nav_location" />
+
+    <item
+        android:id="@+id/option_favorite"
+        android:title="Añadir a favoritos"
+        android:icon="@drawable/ic_nav_favorite" />
+</menu>
