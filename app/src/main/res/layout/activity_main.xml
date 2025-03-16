@@ -6,18 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="20dp"
     tools:context=".view.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/menu_nav"/>
+        android:text="Bienvenido a la app de Turismo Local"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Imagen de inicio de la app"
+        android:src="@drawable/img_home" />
+
+    <Button
+        android:id="@+id/btnInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comenzar"
+        android:onClick="changeActivity"/>
 
 </LinearLayout>
