@@ -6,4 +6,5 @@
     <color name="secondary">#411885</color>
     <color name="tertiary">#702be3</color>
     <color name="background">#10081d</color>
+    <color name="notification">#BA702BE3</color>
 </resources>

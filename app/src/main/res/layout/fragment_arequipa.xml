@@ -27,4 +27,15 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
+    <!-- Pequeño texto con la distancia de ruta -->
+    <TextView
+        android:id="@+id/distanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:visibility="visible"/>
+
 </FrameLayout>
