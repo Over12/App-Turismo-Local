@@ -92,7 +92,6 @@ public class TacnaMapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMapLoadedCallback(() -> {
             if (loadingScreen != null) {
                 loadingScreen.setVisibility(View.GONE);
-                txtDistancia.setBackgroundColor(getResources().getColor(R.color.notification));
                 txtDistancia.setVisibility(View.VISIBLE);
             }
         });
@@ -148,6 +147,7 @@ public class TacnaMapFragment extends Fragment implements OnMapReadyCallback {
         TextView txtLugar = view.findViewById(R.id.txtLugar);
         ImageView imgLugar = view.findViewById(R.id.imgLugar);
         TextView txtDescripcion = view.findViewById(R.id.txtDescripcion);
+        Button btnAgregarFavoritos = view.findViewById(R.id.btnAgregarFavorito);
         Button btnCerrar = view.findViewById(R.id.btnCerrar);
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
 
@@ -172,10 +172,25 @@ public class TacnaMapFragment extends Fragment implements OnMapReadyCallback {
 
         txtDescripcion.setText(lugarTuristico.getDescripcion());
 
+        if (lugarTuristico.isFavorito()) {
+            btnAgregarFavoritos.setText("Quitar de favoritos");
+        } else {
+            btnAgregarFavoritos.setText("Agregar a favoritos");
+        }
+
         LatLng latLng = new LatLng(lugarTuristico.getLatitud(), lugarTuristico.getLongitud());
         moverCamara(latLng);
 
         btnCerrar.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        btnAgregarFavoritos.setOnClickListener(v -> {
+            lugarController.toggleFavorito(lugarTuristico.getId());
+
+            if (lugarTuristico.isFavorito()) {
+                btnAgregarFavoritos.setText("Agregar a favoritos");
+            } else {
+                btnAgregarFavoritos.setText("Quitar de favoritos");
+            }
+        });
 
         bottomSheetDialog.show();
     }

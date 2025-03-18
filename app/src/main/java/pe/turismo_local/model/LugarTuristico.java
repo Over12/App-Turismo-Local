@@ -1,6 +1,11 @@
 package pe.turismo_local.model;
 
-public class LugarTuristico {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class LugarTuristico implements Parcelable {
     private int id;
     private String nombre;
     private String descripcion;
@@ -86,5 +91,45 @@ public class LugarTuristico {
 
     public void setFavorito(boolean favorito) {
         this.favorito = favorito;
+    }
+
+    protected LugarTuristico(Parcel in) {
+        id = in.readInt();
+        nombre = in.readString();
+        descripcion = in.readString();
+        cuidad = in.readString();
+        latitud = in.readDouble();
+        longitud = in.readDouble();
+        imagen = in.readString();
+        favorito = in.readByte() != 0;
+    }
+
+    public static final Creator<LugarTuristico> CREATOR = new Creator<LugarTuristico>() {
+        @Override
+        public LugarTuristico createFromParcel(Parcel in) {
+            return new LugarTuristico(in);
+        }
+
+        @Override
+        public LugarTuristico[] newArray(int size) {
+            return new LugarTuristico[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeString(descripcion);
+        dest.writeString(cuidad);
+        dest.writeDouble(latitud);
+        dest.writeDouble(longitud);
+        dest.writeString(imagen);
+        dest.writeByte((byte) (favorito ? 1 : 0));
     }
 }

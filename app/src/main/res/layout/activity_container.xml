@@ -12,7 +12,21 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="16dp"
+            android:contentDescription="Botón de favoritos"
+            android:src="@drawable/ic_nav_favorite"
+            app:backgroundTint="@color/tertiary"
+            app:elevation="6dp"
+            app:fabSize="normal" />
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

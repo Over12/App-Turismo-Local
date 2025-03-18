@@ -1,5 +1,6 @@
 package pe.turismo_local.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -9,8 +10,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pe.turismo_local.R;
+import pe.turismo_local.controller.LugarController;
 import pe.turismo_local.databinding.ActivityContainerBinding;
+import pe.turismo_local.model.LugarTuristico;
 import pe.turismo_local.view.fragments.TacnaMapFragment;
 import pe.turismo_local.view.fragments.ArequipaMapFragment;
 import pe.turismo_local.view.fragments.LimaMapFragment;
@@ -59,6 +65,14 @@ public class ContainerActivity extends AppCompatActivity {
             }
 
             return true;
+        });
+
+        binding.fab.setOnClickListener(v -> {
+            LugarController controller = new LugarController(this);
+            Intent intent = new Intent(this, FavListActivity.class);
+            List<LugarTuristico> lugares = controller.obtenerFavoritos();
+            intent.putParcelableArrayListExtra("lugares", new ArrayList<>(lugares));
+            startActivity(intent);
         });
     }
 }

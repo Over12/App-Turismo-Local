@@ -48,10 +48,10 @@
             android:paddingBottom="10dp"/>
 
         <Button
-            android:id="@+id/btnComoLlegar"
+            android:id="@+id/btnAgregarFavorito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Como llegar"
+            android:text="Añadir a Favoritos"
             android:textColor="@color/white"
             android:backgroundTint="@color/secondary"/>
 
